@@ -1,0 +1,139 @@
+﻿@model MultiPlug.Base.Http.EdgeApp
+
+@functions
+{
+    string isCurrentVerb(string theVerb)
+    {
+        return (@Model.Extension.Model.Verb == theVerb) ? "selected" : "";
+    }
+}
+
+<form action="" method="post" accept-charset="utf-8" enctype="application/x-www-form-urlencoded">
+    <input type="hidden" name="Guid" value="@Model.Extension.Model.Guid">
+    <section class="row-fluid">
+
+        <div class="row-fluid">
+            <div class="box">
+                <div class="span2">
+                    <a href="@Raw(Model.Context.Paths.Home)"><img alt="Network Icon" src="@Raw(Model.Context.Paths.Assets)images/networks.png"></a>
+                </div>
+                <div class="span8">
+                    <p style="font-size:26px; line-height: 54px; text-align: center; margin: 0px;">HTTP Client</p>
+                </div>
+                <div class="span2" style="text-align: right;">
+                    <a class="btn btn-black" style="height:44px; width:35px" href="@Raw(Model.Context.Paths.Home)"><i class="icon-arrow-left icon-large"></i><p>Back</p></a>
+                    <button type="submit" value="submit" style="height:54px; width:65px" class="item btn btn-green"><i class="icon-save icon-large"></i><p>Save</p></button>
+                </div>
+            </div>
+        </div>
+
+        @Include("MultiPlug.Ext.Network.HTTP.Network_HTTP_Settings_Navigation")
+
+        <div class="box">
+
+            <h4>URL</h4>
+            <div class="row-fluid">
+                <div class="well">
+                    <div class="span2">
+                        <select class="input-block-level" name="Verb">
+                            <option @isCurrentVerb("Get")>Get</option>
+                            <option @isCurrentVerb("Post")>Post</option>
+                        </select>
+                    </div>
+                    <div class="span10">
+                        <input class="input-block-level" name="Url" autocomplete="off" type="text" placeholder="URL" value="@Model.Extension.Model.Url">
+                    </div>
+                </div>
+            </div>
+
+            <h4>Subscriptions</h4>
+            <div class="row-fluid">
+                <div class="well">
+
+                    <table id="SubscriptionsTable" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th class="span10">Subscription</th>
+                                <th class="span2"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var Subscription in @Model.Extension.Model.Subscriptions)
+                            {
+                                <tr>
+                                    <td class="span10">@Subscription.Id</td>
+                                    <td class="span2"><a class="btn btn-red btn-deletesubscription" href="@Raw(Model.Context.Paths.Home)httpclient/delete/?id=@Model.Extension.Model.Guid&sub=@Subscription.Guid"><i class="icon-trash"></i></a></td>
+                                </tr>
+                            }
+
+                            <tr>
+                                <td class="span10"></td>
+                                <td class="span2"><button type="button" class="btn btn-green" id="btn-subscription"><i class="icon-plus"></i></button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+ 
+        <h3 class="box-header">Logging</h3>
+        <div class="box">
+            <h4>Level</h4>
+            <div class="row-fluid">
+                <div class="well">
+                    <div class="row-fluid">
+                        <select name="LoggingLevel">
+                            <option value="0" selected>Errors</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <h4>Log</h4>
+            <div class="row-fluid">
+                <div class="well">
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <textarea id="Logging" spellcheck="false" rows="10" class="input-block-level">@Model.Extension.Model.Log.ToString()</textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</form>
+
+<script>
+    $("#btn-subscription").click(function () {
+        $('#SubscriptionsTable tr:last').before(NewHttpClient());
+
+        $(".btn-deletesubscriptiontemp").click(function (event) {
+            event.preventDefault();
+            $(this).closest("tr").remove();
+        });
+
+        applyMPEventPickerOnClick();
+
+    });
+
+    $(".btn-deletesubscription").click(function (event) {
+        event.preventDefault();
+
+        var theRow = $(this).closest("tr");
+
+        $.post($(this).attr('href'), function (data) {
+
+        })
+        .done(function () {
+            theRow.remove();
+        });
+    });
+
+    function NewHttpClient() {
+        return '<tr>\
+                <td class="span10"><input type="text" name="Subscriptions" class="input-block-level mp-event-picker" value="" autocomplete="off"></td>\
+                <td class="span2"><a class="btn btn-red btn-deletesubscriptiontemp" href="#"><i class="icon-trash"></i></a></td>\
+            </tr>'
+    }
+</script>
+

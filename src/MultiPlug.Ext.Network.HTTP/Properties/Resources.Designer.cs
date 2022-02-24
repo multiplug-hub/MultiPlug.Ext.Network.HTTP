@@ -74,20 +74,182 @@ namespace MultiPlug.Ext.Network.HTTP.Properties {
         ///   Looks up a localized string similar to @model MultiPlug.Base.Http.EdgeApp
         ///
         ///&lt;section class=&quot;row-fluid&quot;&gt;
+        ///
         ///    &lt;div class=&quot;row-fluid&quot;&gt;
         ///        &lt;div class=&quot;box&quot;&gt;
         ///            &lt;div class=&quot;span2&quot;&gt;
-        ///                &lt;a href=&quot;@Raw(Model.Context.Paths.Home)&quot;&gt;&lt;img alt=&quot;Network Icon&quot; src=&quot;@Raw(Model.Context.Paths.Assets)images/networks.png&quot;&gt;&lt;/a&gt;
+        ///                &lt;a style=&quot;line-height: 52px;&quot; href=&quot;@Raw(Model.Context.Paths.Home)&quot;&gt;&lt;img alt=&quot;SMEMA Logo&quot; src=&quot;@Raw(Model.Context.Paths.Assets)images/SMEMA-small.png&quot;&gt;&lt;/a&gt;
         ///            &lt;/div&gt;
         ///            &lt;div class=&quot;span8&quot;&gt;
-        ///                &lt;p style=&quot;font-size:22.75px; padding-top:10px; text-align:center;&quot;&gt;Hypertext Transfer Protocol&lt;/p&gt;
+        ///                &lt;p style=&quot;font-size:26px; line-height: 54px; text-align: center; margin: 0px;&quot;&gt;About&lt;/p&gt;
         ///            &lt;/div&gt;
-        ///        &lt;/div&gt;
-        ///    &lt;/ [rest of string was truncated]&quot;;.
+        ///   [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string SettingsAbout {
+            get {
+                return ResourceManager.GetString("SettingsAbout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @model MultiPlug.Base.Http.EdgeApp
+        ///&lt;form action=&quot;&quot; method=&quot;post&quot; accept-charset=&quot;utf-8&quot; enctype=&quot;application/x-www-form-urlencoded&quot;&gt;
+        ///    &lt;section class=&quot;row-fluid&quot;&gt;
+        ///        &lt;div class=&quot;row-fluid&quot;&gt;
+        ///            &lt;div class=&quot;box&quot;&gt;
+        ///                &lt;div class=&quot;span4&quot;&gt;
+        ///                    &lt;a href=&quot;@Raw(Model.Context.Paths.Home)&quot;&gt;&lt;img alt=&quot;Network Icon&quot; src=&quot;@Raw(Model.Context.Paths.Assets)images/networks.png&quot;&gt;&lt;/a&gt;
+        ///                &lt;/div&gt;
+        ///                &lt;div class=&quot;span4&quot;&gt;
+        ///                    &lt;p style=&quot;fon [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string SettingsHome {
             get {
                 return ResourceManager.GetString("SettingsHome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @model MultiPlug.Base.Http.EdgeApp
+        ///
+        ///@functions
+        ///{
+        ///    string isCurrentVerb(string theVerb)
+        ///    {
+        ///        return (@Model.Extension.Model.Verb == theVerb) ? &quot;selected&quot; : &quot;&quot;;
+        ///    }
+        ///}
+        ///
+        ///&lt;form action=&quot;&quot; method=&quot;post&quot; accept-charset=&quot;utf-8&quot; enctype=&quot;application/x-www-form-urlencoded&quot;&gt;
+        ///    &lt;input type=&quot;hidden&quot; name=&quot;Guid&quot; value=&quot;@Model.Extension.Model.Guid&quot;&gt;
+        ///    &lt;section class=&quot;row-fluid&quot;&gt;
+        ///
+        ///        &lt;div class=&quot;row-fluid&quot;&gt;
+        ///            &lt;div class=&quot;box&quot;&gt;
+        ///                &lt;div class=&quot;span2&quot;&gt;
+        ///             [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string SettingsHttpClient {
+            get {
+                return ResourceManager.GetString("SettingsHttpClient", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @model MultiPlug.Base.Http.EdgeApp
+        ///
+        ///&lt;form action=&quot;&quot; method=&quot;post&quot; accept-charset=&quot;utf-8&quot; enctype=&quot;application/x-www-form-urlencoded&quot;&gt;
+        ///    &lt;input type=&quot;hidden&quot; name=&quot;Guid&quot; value=&quot;@Model.Extension.Model.Guid&quot;&gt;
+        ///    &lt;section class=&quot;row-fluid&quot;&gt;
+        ///
+        ///        &lt;div class=&quot;row-fluid&quot;&gt;
+        ///            &lt;div class=&quot;box&quot;&gt;
+        ///                &lt;div class=&quot;span2&quot;&gt;
+        ///                    &lt;a href=&quot;@Raw(Model.Context.Paths.Home)&quot;&gt;&lt;img alt=&quot;Network Icon&quot; src=&quot;@Raw(Model.Context.Paths.Assets)images/networks.png&quot;&gt;&lt;/a&gt;
+        ///                [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string SettingsHttpClientAuthorisation {
+            get {
+                return ResourceManager.GetString("SettingsHttpClientAuthorisation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @model MultiPlug.Base.Http.EdgeApp
+        ///
+        ///&lt;form action=&quot;&quot; method=&quot;post&quot; accept-charset=&quot;utf-8&quot; enctype=&quot;application/x-www-form-urlencoded&quot;&gt;
+        ///    &lt;input type=&quot;hidden&quot; name=&quot;Guid&quot; value=&quot;@Model.Extension.Model.Guid&quot;&gt;
+        ///    &lt;section class=&quot;row-fluid&quot;&gt;
+        ///
+        ///        &lt;div class=&quot;row-fluid&quot;&gt;
+        ///            &lt;div class=&quot;box&quot;&gt;
+        ///                &lt;div class=&quot;span2&quot;&gt;
+        ///                    &lt;a href=&quot;@Raw(Model.Context.Paths.Home)&quot;&gt;&lt;img alt=&quot;Network Icon&quot; src=&quot;@Raw(Model.Context.Paths.Assets)images/networks.png&quot;&gt;&lt;/a&gt;
+        ///                [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string SettingsHttpClientBody {
+            get {
+                return ResourceManager.GetString("SettingsHttpClientBody", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @model MultiPlug.Base.Http.EdgeApp
+        ///
+        ///&lt;form action=&quot;&quot; method=&quot;post&quot; accept-charset=&quot;utf-8&quot; enctype=&quot;application/x-www-form-urlencoded&quot;&gt;
+        ///    &lt;input type=&quot;hidden&quot; name=&quot;Guid&quot; value=&quot;@Model.Extension.Model.Guid&quot;&gt;
+        ///    &lt;section class=&quot;row-fluid&quot;&gt;
+        ///
+        ///        &lt;div class=&quot;row-fluid&quot;&gt;
+        ///            &lt;div class=&quot;box&quot;&gt;
+        ///                &lt;div class=&quot;span2&quot;&gt;
+        ///                    &lt;a href=&quot;@Raw(Model.Context.Paths.Home)&quot;&gt;&lt;img alt=&quot;Network Icon&quot; src=&quot;@Raw(Model.Context.Paths.Assets)images/networks.png&quot;&gt;&lt;/a&gt;
+        ///                [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string SettingsHttpClientHeaders {
+            get {
+                return ResourceManager.GetString("SettingsHttpClientHeaders", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @model MultiPlug.Base.Http.EdgeApp
+        ///@functions {
+        ///    public string NavLocationIsHome()
+        ///    {
+        ///        return Model.Context.Paths.Current == Model.Context.Paths.Home ? &quot;active&quot; : string.Empty;
+        ///    }
+        ///
+        ///    public string NavLocationIsHttpClient()
+        ///    {
+        ///        return Model.Context.Paths.Current == Model.Context.Paths.Home + &quot;httpclient/&quot; ? &quot;active&quot; : string.Empty;
+        ///    }
+        ///
+        ///    public string NavLocationIsParams()
+        ///    {
+        ///        return Model.Context.Paths.Current == Model.Context.Paths.Home + &quot;httpclient [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string SettingsHttpClientNavigation {
+            get {
+                return ResourceManager.GetString("SettingsHttpClientNavigation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @model MultiPlug.Base.Http.EdgeApp
+        ///
+        ///&lt;form action=&quot;&quot; method=&quot;post&quot; accept-charset=&quot;utf-8&quot; enctype=&quot;application/x-www-form-urlencoded&quot;&gt;
+        ///    &lt;input type=&quot;hidden&quot; name=&quot;Guid&quot; value=&quot;@Model.Extension.Model.Guid&quot;&gt;
+        ///    &lt;section class=&quot;row-fluid&quot;&gt;
+        ///
+        ///        &lt;div class=&quot;row-fluid&quot;&gt;
+        ///            &lt;div class=&quot;box&quot;&gt;
+        ///                &lt;div class=&quot;span2&quot;&gt;
+        ///                    &lt;a href=&quot;@Raw(Model.Context.Paths.Home)&quot;&gt;&lt;img alt=&quot;Network Icon&quot; src=&quot;@Raw(Model.Context.Paths.Assets)images/networks.png&quot;&gt;&lt;/a&gt;
+        ///                [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string SettingsHttpClientParams {
+            get {
+                return ResourceManager.GetString("SettingsHttpClientParams", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @model MultiPlug.Base.Http.EdgeApp
+        ///
+        ///&lt;form action=&quot;&quot; method=&quot;post&quot; accept-charset=&quot;utf-8&quot; enctype=&quot;application/x-www-form-urlencoded&quot;&gt;
+        ///    &lt;input type=&quot;hidden&quot; name=&quot;Guid&quot; value=&quot;@Model.Extension.Model.Guid&quot;&gt;
+        ///    &lt;section class=&quot;row-fluid&quot;&gt;
+        ///
+        ///        &lt;div class=&quot;row-fluid&quot;&gt;
+        ///            &lt;div class=&quot;box&quot;&gt;
+        ///                &lt;div class=&quot;span2&quot;&gt;
+        ///                    &lt;a href=&quot;@Raw(Model.Context.Paths.Home)&quot;&gt;&lt;img alt=&quot;Network Icon&quot; src=&quot;@Raw(Model.Context.Paths.Assets)images/networks.png&quot;&gt;&lt;/a&gt;
+        ///                [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string SettingsHttpClientSettings {
+            get {
+                return ResourceManager.GetString("SettingsHttpClientSettings", resourceCulture);
             }
         }
     }

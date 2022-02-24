@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>MultiPlug.Ext.Network.HTTP</id>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <title>HTTP Extension for the MultiPlug .Net Edge Computing Platform</title>
     <authors>MultiPlugHub</authors>
     <owners>MultiPlugHub</owners>
@@ -11,14 +11,15 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>HTTP Extension for the MultiPlug .Net Edge Computing Platform</description>
 	<license type="expression">MIT</license>
-    <releaseNotes>1.0.0 Reserve name and create project scaffolding.</releaseNotes>
+    <releaseNotes>1.0.1 Basic Get/Post Http Requests
+	1.0.0 Reserve name and create project scaffolding.</releaseNotes>
     <copyright>MultiPlug Community</copyright>
-    <tags>MultiPlug Edge_Computing Edge IoT HTTP</tags>
+    <tags>MultiPlug Edge_Computing Edge IoT HTTP No-Code Low-Code Low-Code/No-Code</tags>
     <dependencies>
       <group targetFramework=".NETFramework4.7.2">
-        <dependency id="MultiPlug.Base" version="1.0.64" />
+        <dependency id="MultiPlug.Base" version="1.0.69" />
         <dependency id="MultiPlug.Extension.Core" version="1.0.63" />
-        <dependency id="MultiPlug.Core" version="2.2.76" />
+        <dependency id="MultiPlug.Core" version="2.2.79" />
       </group>
     </dependencies>
   </metadata>

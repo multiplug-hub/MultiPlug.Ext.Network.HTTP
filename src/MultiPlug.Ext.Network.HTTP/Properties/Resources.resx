@@ -121,7 +121,31 @@
   <data name="NetworksIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\networks.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="SettingsAbout" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Controllers\Settings\About\SettingsAbout.cshtml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
   <data name="SettingsHome" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Controllers\Settings\Home\Home.cshtml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="SettingsHttpClient" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Controllers\Settings\HttpClient\HttpClient.cshtml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="SettingsHttpClientAuthorisation" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Controllers\Settings\HttpClient\Authorisation\HttpClientAuthorisation.cshtml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="SettingsHttpClientBody" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Controllers\Settings\HttpClient\Body\HttpClientBody.cshtml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="SettingsHttpClientHeaders" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Controllers\Settings\HttpClient\Headers\HttpClientHeaders.cshtml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="SettingsHttpClientNavigation" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Controllers\Settings\Shared\SettingsHttpClientNavigation.cshtml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="SettingsHttpClientParams" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Controllers\Settings\HttpClient\Params\HttpClientParams.cshtml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="SettingsHttpClientSettings" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Controllers\Settings\HttpClient\Settings\HttpClientSettings.cshtml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
 </root>

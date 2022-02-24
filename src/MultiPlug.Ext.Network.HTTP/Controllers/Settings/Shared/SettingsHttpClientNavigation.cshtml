@@ -1,0 +1,63 @@
+﻿@model MultiPlug.Base.Http.EdgeApp
+@functions {
+    public string NavLocationIsHome()
+    {
+        return Model.Context.Paths.Current == Model.Context.Paths.Home ? "active" : string.Empty;
+    }
+
+    public string NavLocationIsHttpClient()
+    {
+        return Model.Context.Paths.Current == Model.Context.Paths.Home + "httpclient/" ? "active" : string.Empty;
+    }
+
+    public string NavLocationIsParams()
+    {
+        return Model.Context.Paths.Current == Model.Context.Paths.Home + "httpclient/params/" ? "active" : string.Empty;
+    }
+
+    public string NavLocationIsAuthorisation()
+    {
+        return Model.Context.Paths.Current == Model.Context.Paths.Home + "httpclient/authorisation/" ? "active" : string.Empty;
+    }
+
+    public string NavLocationIsHeaders()
+    {
+        return Model.Context.Paths.Current == Model.Context.Paths.Home + "httpclient/headers/" ? "active" : string.Empty;
+    }
+
+    public string NavLocationIsBody()
+    {
+        return Model.Context.Paths.Current == Model.Context.Paths.Home + "httpclient/body/" ? "active" : string.Empty;
+    }
+
+    public string NavLocationIsSettings()
+    {
+        return Model.Context.Paths.Current == Model.Context.Paths.Home + "httpclient/settings/" ? "active" : string.Empty;
+    }
+
+    public string NavLocationIsAbout()
+    {
+        return Model.Context.Paths.Current == Model.Context.Paths.Home + "about/" ? "active" : string.Empty;
+    }
+}
+
+<div class="row-fluid">
+    <ul class="nav nav-tabs">
+        <li class="@NavLocationIsHome()"><a href="@Raw(Model.Context.Paths.Home)">Home</a></li>
+
+        @if (!string.IsNullOrEmpty(Model.Extension.Model.Guid))
+        {
+            <li class="@NavLocationIsHttpClient()"><a href="@Raw(Model.Context.Paths.Home)httpclient/?id=@Model.Extension.Model.Guid">URL</a></li>
+            <li class="@NavLocationIsParams()"><a href="@Raw(Model.Context.Paths.Home)httpclient/params/?id=@Model.Extension.Model.Guid">Params</a></li>
+            <li class="@NavLocationIsAuthorisation()"><a href="@Raw(Model.Context.Paths.Home)httpclient/authorisation/?id=@Model.Extension.Model.Guid">Authorisation</a></li>
+            <li class="@NavLocationIsHeaders()"><a href="@Raw(Model.Context.Paths.Home)httpclient/headers/?id=@Model.Extension.Model.Guid">Headers</a></li>
+            <li class="@NavLocationIsBody()"><a href="@Raw(Model.Context.Paths.Home)httpclient/body/?id=@Model.Extension.Model.Guid">Body</a></li>
+            <li class="@NavLocationIsSettings()"><a href="@Raw(Model.Context.Paths.Home)httpclient/settings/?id=@Model.Extension.Model.Guid">Settings</a></li>
+            <li class="@NavLocationIsAbout()"><a href="@Raw(Model.Context.Paths.Home)about/?id=@Model.Extension.Model.Guid">About</a></li>
+        }
+        else
+        {
+            <li class="@NavLocationIsAbout()"><a href="@Raw(Model.Context.Paths.Home)about/">About</a></li>
+        }
+    </ul>
+</div>
