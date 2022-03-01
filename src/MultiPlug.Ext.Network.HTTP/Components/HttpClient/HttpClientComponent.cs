@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Web;
 using System.Net.Http;
 using System.Collections.Generic;
 using MultiPlug.Base.Exchange;
@@ -17,7 +18,10 @@ namespace MultiPlug.Ext.Network.HTTP.Components.HttpClient
         public HttpClientComponent(string theGuid)
         {
             this.Guid = theGuid;
-        }
+
+            Subscriptions = new Subscription[0];
+            Headers = new Header[0];
+    }
 
         internal void UpdateProperties(HttpClientProperties theNewProperties)
         {
@@ -61,13 +65,57 @@ namespace MultiPlug.Ext.Network.HTTP.Components.HttpClient
 
                 if (FlagSubscriptionUpdated) { SubscriptionsUpdated?.Invoke(); }
             }
+
+            if(theNewProperties.Headers != null)
+            {
+                AddHeaders(theNewProperties.Headers);
+            }
+        }
+
+        internal void AddHeaders(Header[] theNewHeaders)
+        {
+            List<Header> HeadersList = Headers.ToList();
+
+            foreach( var NewHeader in theNewHeaders)
+            {
+                if(string.IsNullOrEmpty(NewHeader.Key) || NewHeader.Value == null || NewHeader.Description == null)
+                {
+                    continue;
+                }
+
+                Header Search = HeadersList.FirstOrDefault(Header => Header.Key.Equals( NewHeader.Key, StringComparison.OrdinalIgnoreCase));
+
+                if(Search == null)
+                {
+                    HeadersList.Add(NewHeader);
+                }
+            }
+
+            Headers = HeadersList.ToArray();
+        }
+
+        internal bool DeleteHeader(string key)
+        {
+            List<Header> HeadersList = Headers.ToList();
+            Header Search = HeadersList.FirstOrDefault(Header => Header.Key == key);
+
+            if( Search != null)
+            {
+                HeadersList.Remove(Search);
+                Headers = HeadersList.ToArray();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         private void OnEvent(SubscriptionEvent theEvent)
         {
             if( Verb == "Get")
             {
-                var AsArray = theEvent.Payload.Subjects.Select(Subject => string.Format("{0}={1}", Subject.Subject, Subject.Value));
+                var AsArray = theEvent.Payload.Subjects.Select(Subject => string.Format("{0}={1}", HttpUtility.UrlEncode(Subject.Subject), HttpUtility.UrlEncode(Subject.Value)));
 
                 string QueryString = "";
 
@@ -78,7 +126,15 @@ namespace MultiPlug.Ext.Network.HTTP.Components.HttpClient
 
                 try
                 {
-                    m_HttpClient.GetStringAsync(Url + QueryString).Wait();
+                    using (var request = new HttpRequestMessage(HttpMethod.Get, Url + QueryString))
+                    {
+                        foreach (var Header in Headers)
+                        {
+                            request.Headers.Add(Header.Key, Header.Value);
+                        }
+
+                        m_HttpClient.SendAsync(request).Wait();
+                    }
                 }
                 catch(Exception theException)
                 {
@@ -101,6 +157,12 @@ namespace MultiPlug.Ext.Network.HTTP.Components.HttpClient
                 var KeyValues = theEvent.Payload.Subjects.Select(Subject => new KeyValuePair<string, string>(Subject.Subject, Subject.Value));
 
                 HttpContent HttpContent = new FormUrlEncodedContent(KeyValues);
+
+                foreach( var Header in Headers)
+                {
+                    HttpContent.Headers.Add(Header.Key, Header.Value);
+                }
+
                 try
                 {
                     m_HttpClient.PostAsync(Url, HttpContent).Wait();

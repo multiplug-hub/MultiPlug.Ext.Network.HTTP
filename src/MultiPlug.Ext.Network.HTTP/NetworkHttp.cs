@@ -1,4 +1,5 @@
-﻿using MultiPlug.Extension.Core;
+﻿using System.Net;
+using MultiPlug.Extension.Core;
 using MultiPlug.Extension.Core.Http;
 using MultiPlug.Ext.Network.HTTP.Controllers;
 using MultiPlug.Ext.Network.HTTP.Properties;
@@ -13,6 +14,10 @@ namespace MultiPlug.Ext.Network.HTTP
 
         public NetworkHttp()
         {
+            ServicePointManager.Expect100Continue = true;
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+            // Use SecurityProtocolType.Ssl3 if needed for compatibility reasons
+
             Core.Instance.SubscriptionsUpdated += OnSubscriptionsUpdated;
         }
 

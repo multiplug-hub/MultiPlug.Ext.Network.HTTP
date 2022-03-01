@@ -1,7 +1,7 @@
-﻿using System.Runtime.Serialization;
+﻿using System.Text;
+using System.Runtime.Serialization;
 using MultiPlug.Base;
 using MultiPlug.Base.Exchange;
-using System.Text;
 
 namespace MultiPlug.Ext.Network.HTTP.Models.Components.HttpClient
 {
@@ -14,9 +14,9 @@ namespace MultiPlug.Ext.Network.HTTP.Models.Components.HttpClient
         [DataMember]
         public string Url { get; set; }
         [DataMember]
-        public Subscription[] Subscriptions { get; set; } = new Subscription[0];
-
-
+        public Subscription[] Subscriptions { get; set; }
+        [DataMember]
+        public Header[] Headers { get; set; }
         public StringBuilder Log { get; set; } = new StringBuilder();
     }
 }

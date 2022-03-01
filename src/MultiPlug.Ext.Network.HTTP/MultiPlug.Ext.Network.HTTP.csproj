@@ -43,6 +43,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -60,6 +61,7 @@
     <Compile Include="Controllers\Settings\HttpClient\Authorisation\HttpClientAuthorisationController.cs" />
     <Compile Include="Controllers\Settings\HttpClient\Body\HttpClientBodyController.cs" />
     <Compile Include="Controllers\Settings\HttpClient\Headers\HttpClientHeadersController.cs" />
+    <Compile Include="Controllers\Settings\HttpClient\Headers\HttpClientHeadersDeleteController.cs" />
     <Compile Include="Controllers\Settings\HttpClient\HttpClientController.cs" />
     <Compile Include="Controllers\Settings\HttpClient\HttpClientDeleteController.cs" />
     <Compile Include="Controllers\Settings\HttpClient\Params\HttpClientParamsController.cs" />
@@ -67,12 +69,14 @@
     <Compile Include="Controllers\Settings\SettingsApp.cs" />
     <Compile Include="Controllers\Templates.cs" />
     <Compile Include="Core.cs" />
+    <Compile Include="Models\Components\HttpClient\Header.cs" />
     <Compile Include="Models\Components\HttpClient\HttpClientProperties.cs" />
     <Compile Include="Models\Components\HttpEndpoint\HttpEndpointProperties.cs" />
     <Compile Include="Models\Load\LoadRoot.cs" />
     <Compile Include="Models\Settings\About\AboutModel.cs" />
     <Compile Include="Models\Settings\Home\HomeModel.cs" />
     <Compile Include="Models\Settings\Home\NewHttpItem.cs" />
+    <Compile Include="Models\Settings\HttpClient\Headers\HeadersModel.cs" />
     <Compile Include="Models\Settings\HttpClient\HttpClientModel.cs" />
     <Compile Include="NetworkHttp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -109,7 +113,8 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy "$(ProjectDir)bin\$(ConfigurationName)\MultiPlug.Ext.Network.HTTP.dll" "C:\projects\i4Core\Connector\MultiPlug.CLI\bin\Debug\extensions\MultiPlug.Ext.Network.HTTP\" /Y /I</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

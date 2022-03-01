@@ -47,7 +47,7 @@
 
         @if (!string.IsNullOrEmpty(Model.Extension.Model.Guid))
         {
-            <li class="@NavLocationIsHttpClient()"><a href="@Raw(Model.Context.Paths.Home)httpclient/?id=@Model.Extension.Model.Guid">URL</a></li>
+            <li class="@NavLocationIsHttpClient()"><a href="@Raw(Model.Context.Paths.Home)httpclient/?id=@Model.Extension.Model.Guid">Request</a></li>
             <li class="@NavLocationIsParams()"><a href="@Raw(Model.Context.Paths.Home)httpclient/params/?id=@Model.Extension.Model.Guid">Params</a></li>
             <li class="@NavLocationIsAuthorisation()"><a href="@Raw(Model.Context.Paths.Home)httpclient/authorisation/?id=@Model.Extension.Model.Guid">Authorisation</a></li>
             <li class="@NavLocationIsHeaders()"><a href="@Raw(Model.Context.Paths.Home)httpclient/headers/?id=@Model.Extension.Model.Guid">Headers</a></li>
