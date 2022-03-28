@@ -2,13 +2,13 @@
 using MultiPlug.Base.Attribute;
 using MultiPlug.Base.Http;
 using MultiPlug.Ext.Network.HTTP.Models.Components.HttpClient;
-using MultiPlug.Ext.Network.HTTP.Models.Settings.HttpClient.Params;
+using MultiPlug.Ext.Network.HTTP.Models.Settings.HttpClient.Response;
 using MultiPlug.Ext.Network.HTTP.Components.HttpClient;
 
-namespace MultiPlug.Ext.Network.HTTP.Controllers.Settings.HttpClient
+namespace MultiPlug.Ext.Network.HTTP.Controllers.Settings.HttpClient.HttpResponse
 {
-    [Route("httpclient/body")]
-    public class HttpClientBodyController : SettingsApp
+    [Route("httpclient/response")]
+    public class HttpClientResponseController : SettingsApp
     {
         public Response Get(string id)
         {
@@ -25,11 +25,11 @@ namespace MultiPlug.Ext.Network.HTTP.Controllers.Settings.HttpClient
             return new Response
             {
                 Model = HttpClientSearch,
-                Template = Templates.SettingsHttpClientBody
+                Template = Templates.SettingsHttpClientResponse
             };
         }
 
-        public Response Post(ParamsModel theModel)
+        public Response Post(ResponseModel theModel)
         {
             HttpClientComponent HttpClientSearch = Core.Instance.HttpClients.FirstOrDefault(Lane => Lane.Guid == theModel.Guid);
 
@@ -41,23 +41,14 @@ namespace MultiPlug.Ext.Network.HTTP.Controllers.Settings.HttpClient
                 };
             }
 
-            if (theModel.Key != null && theModel.Value != null && theModel.Description != null &&
-                (theModel.Key.Length == theModel.Value.Length) && (theModel.Key.Length == theModel.Description.Length))
+            HttpClientSearch.UpdateProperties(new HttpClientProperties
             {
-                var NewParams = new Param[theModel.Key.Length];
-
-                for (int i = 0; i < theModel.Key.Length; i++)
+                ResponseEvent = new Base.Exchange.Event
                 {
-                    NewParams[i] = new Param
-                    {
-                        Key = theModel.Key[i],
-                        Value = theModel.Value[i],
-                        Description = theModel.Description[i]
-                    };
+                    Id = theModel.EventId,
+                    Description = theModel.EventDescription
                 }
-
-                HttpClientSearch.AddBodyParams(NewParams);
-            }
+            });
 
             return new Response
             {

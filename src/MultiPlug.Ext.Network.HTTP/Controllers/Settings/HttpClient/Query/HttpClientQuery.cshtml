@@ -23,7 +23,7 @@
 
         <div class="box">
 
-            <h4>Body Params</h4>
+            <h4>Query Params</h4>
             <div class="row-fluid">
                 <div class="well">
                     <table id="ParamsTable" class="table table-striped">
@@ -36,13 +36,13 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var Header in @Model.Extension.Model.BodyParams)
+                            @foreach (var Header in @Model.Extension.Model.QueryParams)
                             {
                                 <tr>
                                     <td class="span3">@Header.Key</td>
                                     <td class="span3">@Header.Value</td>
                                     <td class="span3">@Header.Description</td>
-                                    <td class="span3"><a class="btn btn-red btn-delete-params" href="@Raw(Model.Context.Paths.Home)httpclient/body/delete/?id=@Model.Extension.Model.Guid&key=@Header.Key"><i class="icon-trash"></i></a></td>
+                                    <td class="span3"><a class="btn btn-red btn-delete-params" href="@Raw(Model.Context.Paths.Home)httpclient/query/delete/?id=@Model.Extension.Model.Guid&key=@Header.Key"><i class="icon-trash"></i></a></td>
                                 </tr>
                             }
 

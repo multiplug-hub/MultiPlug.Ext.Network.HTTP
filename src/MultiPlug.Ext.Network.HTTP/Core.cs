@@ -16,8 +16,10 @@ namespace MultiPlug.Ext.Network.HTTP
         private static Core m_Instance = null;
 
         internal event Action SubscriptionsUpdated;
+        internal event Action EventsUpdated;
 
-        internal Subscription[] Subscriptions { get; private set; }
+        internal Subscription[] Subscriptions { get; private set; } = new Subscription[0];
+        internal Event[] Events { get; private set; } = new Event[0];
 
         public static Core Instance
         {
@@ -122,6 +124,18 @@ namespace MultiPlug.Ext.Network.HTTP
             return HttpClientSearch.SubscriptionDelete(theSubscriptionGuid);
         }
 
+        internal bool HttpClientRenameDelete(string theGuid, string renamevalue)
+        {
+            var HttpClientSearch = Core.Instance.HttpClients.FirstOrDefault(Lane => Lane.Guid == theGuid);
+
+            if (HttpClientSearch == null)
+            {
+                return false;
+            }
+
+            return HttpClientSearch.RenameDelete(renamevalue);
+        }
+
         private void OnSubscriptionsUpdated()
         {
             AggregateSubscriptions();
@@ -129,15 +143,25 @@ namespace MultiPlug.Ext.Network.HTTP
 
         private void OnEventsUpdated()
         {
+            AggregateEvents();
         }
 
         private void AggregateEvents()
         {
+            var EventsList = new List<Event>();
+
+            foreach (var Lane in HttpClients)
+            {
+                EventsList.Add(Lane.ResponseEvent);
+            }
+
+            Events = EventsList.ToArray();
+            EventsUpdated?.Invoke();
         }
 
         private void AggregateSubscriptions()
         {
-            var SubscriptionsList = new List<Base.Exchange.Subscription>();
+            var SubscriptionsList = new List<Subscription>();
 
             foreach (var Lane in HttpClients)
             {

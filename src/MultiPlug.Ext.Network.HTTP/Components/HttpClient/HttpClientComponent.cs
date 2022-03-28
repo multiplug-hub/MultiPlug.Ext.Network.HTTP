@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Web;
-using System.Net.Http;
 using System.Collections.Generic;
 using MultiPlug.Base.Exchange;
 using MultiPlug.Ext.Network.HTTP.Models.Components.HttpClient;
@@ -15,20 +13,40 @@ namespace MultiPlug.Ext.Network.HTTP.Components.HttpClient
 
         private readonly System.Net.Http.HttpClient m_HttpClient = new System.Net.Http.HttpClient();
 
+        private string[] c_Subjects = new string[] { "Response", "StatusCode", "Headers" };
+
         public HttpClientComponent(string theGuid)
         {
             this.Guid = theGuid;
 
-            Subscriptions = new Subscription[0];
+            ResponseEvent = new Event
+            {
+                Guid = System.Guid.NewGuid().ToString(),
+                Id = System.Guid.NewGuid().ToString(),
+                Description = "HTTP Response",
+                Subjects = c_Subjects
+            };
+            Subscriptions = new Models.Exchange.Subscription[0];
             Headers = new Header[0];
-    }
+            QueryParams = new Param[0];
+            BodyParams = new Param[0];
+            SubjectValueRenames = new SubjectValueRename[0];
+        }
 
         internal void UpdateProperties(HttpClientProperties theNewProperties)
         {
             bool FlagSubscriptionUpdated = false;
+            bool FlagEventUpdated = false;
 
-            Verb = theNewProperties.Verb;
-            Url = theNewProperties.Url;
+            if(!string.IsNullOrEmpty(theNewProperties.Verb))
+            {
+                Verb = theNewProperties.Verb;
+            }
+
+            if(theNewProperties.Url != null)
+            {
+                Url = theNewProperties.Url;
+            }
 
             if( theNewProperties.Subscriptions != null)
             {
@@ -41,8 +59,9 @@ namespace MultiPlug.Ext.Network.HTTP.Components.HttpClient
                         Subscription.Guid = System.Guid.NewGuid().ToString();
                         SubscriptionsList.Add(Subscription);
                         FlagSubscriptionUpdated = true;
+                        Subscription.EventHandler = new HttpClientEventHandler(this, m_HttpClient, Subscription);
 
-                        Subscription.Event += OnEvent;
+                        Models.Exchange.Subscription.Sync(Subscription);
                     }
                     else
                     {
@@ -50,26 +69,138 @@ namespace MultiPlug.Ext.Network.HTTP.Components.HttpClient
 
                         if( SubscriptionSearch != null)
                         {
-                            if (Subscription.Merge(SubscriptionSearch, Subscription)) { FlagSubscriptionUpdated = true; }
+                            if (Base.Exchange.Subscription.Merge(SubscriptionSearch, Subscription)) { FlagSubscriptionUpdated = true; }
+
+                            Models.Exchange.Subscription.Merge(SubscriptionSearch, Subscription);
                         }
                         else
                         {
-                            Subscription.Event += OnEvent;
+                            Subscription.EventHandler = new HttpClientEventHandler(this, m_HttpClient, Subscription);
                             SubscriptionsList.Add(Subscription);
                             FlagSubscriptionUpdated = true;
+                            Models.Exchange.Subscription.Sync(Subscription); //Is this needed?
                         }
                     }
                 }
 
                 Subscriptions = SubscriptionsList.ToArray();
-
-                if (FlagSubscriptionUpdated) { SubscriptionsUpdated?.Invoke(); }
             }
 
             if(theNewProperties.Headers != null)
             {
                 AddHeaders(theNewProperties.Headers);
             }
+
+            if (theNewProperties.QueryParams != null)
+            {
+                AddQueryParams(theNewProperties.QueryParams);
+            }
+
+            if (theNewProperties.BodyParams != null)
+            {
+                AddBodyParams(theNewProperties.BodyParams);
+            }
+
+            if(theNewProperties.SubjectValueRenames != null)
+            {
+                SubjectValueRenames = theNewProperties.SubjectValueRenames;
+            }
+
+            if( theNewProperties.ResponseEvent != null)
+            {
+                FlagEventUpdated = Event.Merge(ResponseEvent, theNewProperties.ResponseEvent);
+                ResponseEvent.Subjects = c_Subjects;
+            }
+
+            if (FlagEventUpdated) { EventsUpdated?.Invoke(); }
+            if (FlagSubscriptionUpdated) { SubscriptionsUpdated?.Invoke(); }
+        }
+
+        private List<Param> AddParams(Param[] theNewParams, List<Param> ParamsList)
+        {
+            foreach (var NewParam in theNewParams)
+            {
+                if (string.IsNullOrEmpty(NewParam.Key) || NewParam.Value == null || NewParam.Description == null)
+                {
+                    continue;
+                }
+
+                Param Search = ParamsList.FirstOrDefault(Header => Header.Key.Equals(NewParam.Key, StringComparison.OrdinalIgnoreCase));
+
+                if (Search == null)
+                {
+                    ParamsList.Add(NewParam);
+                }
+            }
+
+            return ParamsList;
+        }
+
+        internal void AddBodyParams(Param[] theNewParams)
+        {
+            BodyParams = AddParams(theNewParams, BodyParams.ToList()).ToArray();
+        }
+
+        internal void AddQueryParams(Param[] theNewParams)
+        {
+            QueryParams = AddParams(theNewParams, QueryParams.ToList()).ToArray();
+        }
+
+        private bool DeleteParam( string theKey, List<Param> ParamsList)
+        {
+            Param Search = ParamsList.FirstOrDefault(Header => Header.Key == theKey);
+
+            if (Search != null)
+            {
+                ParamsList.Remove(Search);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        internal bool DeleteQueryParam(string key)
+        {
+            List<Param> ParamsList = QueryParams.ToList();
+
+            var Result = DeleteParam(key, ParamsList);
+
+            QueryParams = ParamsList.ToArray();
+
+            return Result;
+        }
+
+        internal bool RenameDelete(string renamevalue)
+        {
+            bool Found = false;
+
+            SubjectValueRenames = SubjectValueRenames.Where(Rename =>
+            {
+                if (Rename.Value == renamevalue)
+                {
+                    Found = true;
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }).ToArray();
+
+            return Found;
+        }
+
+        internal bool DeleteBodyParam(string key)
+        {
+            List<Param> ParamsList = BodyParams.ToList();
+
+            bool Result = DeleteParam(key, ParamsList);
+
+            BodyParams = ParamsList.ToArray();
+
+            return Result;
         }
 
         internal void AddHeaders(Header[] theNewHeaders)
@@ -111,94 +242,24 @@ namespace MultiPlug.Ext.Network.HTTP.Components.HttpClient
             }
         }
 
-        private void OnEvent(SubscriptionEvent theEvent)
-        {
-            if( Verb == "Get")
-            {
-                var AsArray = theEvent.Payload.Subjects.Select(Subject => string.Format("{0}={1}", HttpUtility.UrlEncode(Subject.Subject), HttpUtility.UrlEncode(Subject.Value)));
-
-                string QueryString = "";
-
-                if (AsArray.Count() > 0)
-                {
-                    QueryString = "?" + string.Join("&", AsArray);
-                }
-
-                try
-                {
-                    using (var request = new HttpRequestMessage(HttpMethod.Get, Url + QueryString))
-                    {
-                        foreach (var Header in Headers)
-                        {
-                            request.Headers.Add(Header.Key, Header.Value);
-                        }
-
-                        m_HttpClient.SendAsync(request).Wait();
-                    }
-                }
-                catch(Exception theException)
-                {
-                    Log.AppendLine(" - - - - -");
-                    Log.AppendLine(theException.Message);
-
-                    var Inner = theException.InnerException;
-
-                    while (Inner != null)
-                    {
-                        Log.AppendLine(Inner.Message);
-
-                        Inner = Inner.InnerException;
-                    }
-                    Log.AppendLine(" - - - - -");
-                }   
-            }
-            else //Post
-            {
-                var KeyValues = theEvent.Payload.Subjects.Select(Subject => new KeyValuePair<string, string>(Subject.Subject, Subject.Value));
-
-                HttpContent HttpContent = new FormUrlEncodedContent(KeyValues);
-
-                foreach( var Header in Headers)
-                {
-                    HttpContent.Headers.Add(Header.Key, Header.Value);
-                }
-
-                try
-                {
-                    m_HttpClient.PostAsync(Url, HttpContent).Wait();
-                }
-                catch (Exception theException)
-                {
-                    Log.AppendLine(" - - - - -");
-
-                    Log.AppendLine(theException.Message);
-
-                    var Inner = theException.InnerException;
-
-                    while (Inner != null)
-                    {
-                        Log.AppendLine(Inner.Message);
-
-                        Inner = Inner.InnerException;
-                    }
-                    Log.AppendLine(" - - - - -");
-                }
-            }
-        }
-
         internal bool SubscriptionDelete(string theSubscriptionGuid)
         {
             var SubscriptionsList = Subscriptions.ToList();
 
-            Subscription SubscriptionSearch =  SubscriptionsList.FirstOrDefault(Subscription => Subscription.Guid == theSubscriptionGuid);
+            Models.Exchange.Subscription SubscriptionSearch =  SubscriptionsList.FirstOrDefault(Subscription => Subscription.Guid == theSubscriptionGuid);
 
             if( SubscriptionSearch != null)
             {
-                SubscriptionSearch.Event -= OnEvent;
+                SubscriptionSearch.EventHandler.Remove();
 
                 bool Result = SubscriptionsList.Remove(SubscriptionSearch);
 
                 Subscriptions = SubscriptionsList.ToArray();
+
+                if(Result)
+                {
+                    SubscriptionsUpdated?.Invoke();
+                }
 
                 return Result;
             }

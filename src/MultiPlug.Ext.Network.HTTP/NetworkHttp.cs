@@ -19,11 +19,7 @@ namespace MultiPlug.Ext.Network.HTTP
             // Use SecurityProtocolType.Ssl3 if needed for compatibility reasons
 
             Core.Instance.SubscriptionsUpdated += OnSubscriptionsUpdated;
-        }
-
-        private void OnSubscriptionsUpdated()
-        {
-            MultiPlugActions.Extension.Updates.Subscriptions();
+            Core.Instance.EventsUpdated += OnEventsUpdated;
         }
 
         public override RazorTemplate[] RazorTemplates
@@ -36,10 +32,12 @@ namespace MultiPlug.Ext.Network.HTTP
                     new RazorTemplate( Templates.SettingsHome, Resources.SettingsHome ),
                     new RazorTemplate( Templates.SettingsAbout, Resources.SettingsAbout ),
                     new RazorTemplate( Templates.SettingsHttpClient, Resources.SettingsHttpClient ),
+                    new RazorTemplate( Templates.SettingsHttpClientSubscription, Resources.SettingsHttpClientSubscription ),
                     new RazorTemplate( Templates.SettingsHttpClientAuthorisation, Resources.SettingsHttpClientAuthorisation ),
                     new RazorTemplate( Templates.SettingsHttpClientHeaders, Resources.SettingsHttpClientHeaders ),
                     new RazorTemplate( Templates.SettingsHttpClientBody, Resources.SettingsHttpClientBody ),
-                    new RazorTemplate( Templates.SettingsHttpClientParams, Resources.SettingsHttpClientParams ),
+                    new RazorTemplate( Templates.SettingsHttpClientQuery, Resources.SettingsHttpClientQuery ),
+                    new RazorTemplate( Templates.SettingsHttpClientResponse, Resources.SettingsHttpClientResponse ),
                     new RazorTemplate( Templates.SettingsHttpClientSettings, Resources.SettingsHttpClientSettings )
                 };
             }
@@ -72,6 +70,23 @@ namespace MultiPlug.Ext.Network.HTTP
             {
                 return Core.Instance.Subscriptions;
             }
+        }
+        public override Event[] Events
+        {
+            get
+            {
+                return Core.Instance.Events;
+            }
+        }
+
+        private void OnSubscriptionsUpdated()
+        {
+            MultiPlugActions.Extension.Updates.Subscriptions();
+        }
+
+        private void OnEventsUpdated()
+        {
+            MultiPlugActions.Extension.Updates.Events();
         }
     }
 }

@@ -10,7 +10,9 @@ namespace MultiPlug.Ext.Network.HTTP.Controllers
         internal const string SettingsHttpClientAuthorisation = "Network_HTTP_Settings_HttpClient_Authorisation";
         internal const string SettingsHttpClientHeaders = "Network_HTTP_Settings_HttpClient_Headers";
         internal const string SettingsHttpClientBody = "Network_HTTP_Settings_HttpClient_Body";
-        internal const string SettingsHttpClientParams = "Network_HTTP_Settings_HttpClient_Params";
+        internal const string SettingsHttpClientQuery = "Network_HTTP_Settings_HttpClient_Query";
         internal const string SettingsHttpClientSettings = "Network_HTTP_Settings_HttpClient_Settings";
+        internal const string SettingsHttpClientResponse = "Network_HTTP_Settings_HttpClient_Response";
+        internal const string SettingsHttpClientSubscription = "Network_HTTP_Settings_HttpClient_Subscription";
     }
 }

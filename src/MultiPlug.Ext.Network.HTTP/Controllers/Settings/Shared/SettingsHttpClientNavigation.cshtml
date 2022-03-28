@@ -12,7 +12,7 @@
 
     public string NavLocationIsParams()
     {
-        return Model.Context.Paths.Current == Model.Context.Paths.Home + "httpclient/params/" ? "active" : string.Empty;
+        return Model.Context.Paths.Current == Model.Context.Paths.Home + "httpclient/query/" ? "active" : string.Empty;
     }
 
     public string NavLocationIsAuthorisation()
@@ -39,6 +39,11 @@
     {
         return Model.Context.Paths.Current == Model.Context.Paths.Home + "about/" ? "active" : string.Empty;
     }
+
+    public string NavLocationIsResponse()
+    {
+        return Model.Context.Paths.Current == Model.Context.Paths.Home + "httpclient/response/" ? "active" : string.Empty;
+    }
 }
 
 <div class="row-fluid">
@@ -48,10 +53,11 @@
         @if (!string.IsNullOrEmpty(Model.Extension.Model.Guid))
         {
             <li class="@NavLocationIsHttpClient()"><a href="@Raw(Model.Context.Paths.Home)httpclient/?id=@Model.Extension.Model.Guid">Request</a></li>
-            <li class="@NavLocationIsParams()"><a href="@Raw(Model.Context.Paths.Home)httpclient/params/?id=@Model.Extension.Model.Guid">Params</a></li>
+            <li class="@NavLocationIsParams()"><a href="@Raw(Model.Context.Paths.Home)httpclient/query/?id=@Model.Extension.Model.Guid">Query</a></li>
             <li class="@NavLocationIsAuthorisation()"><a href="@Raw(Model.Context.Paths.Home)httpclient/authorisation/?id=@Model.Extension.Model.Guid">Authorisation</a></li>
             <li class="@NavLocationIsHeaders()"><a href="@Raw(Model.Context.Paths.Home)httpclient/headers/?id=@Model.Extension.Model.Guid">Headers</a></li>
             <li class="@NavLocationIsBody()"><a href="@Raw(Model.Context.Paths.Home)httpclient/body/?id=@Model.Extension.Model.Guid">Body</a></li>
+            <li class="@NavLocationIsResponse()"><a href="@Raw(Model.Context.Paths.Home)httpclient/response/?id=@Model.Extension.Model.Guid">Response</a></li>
             <li class="@NavLocationIsSettings()"><a href="@Raw(Model.Context.Paths.Home)httpclient/settings/?id=@Model.Extension.Model.Guid">Settings</a></li>
             <li class="@NavLocationIsAbout()"><a href="@Raw(Model.Context.Paths.Home)about/?id=@Model.Extension.Model.Guid">About</a></li>
         }

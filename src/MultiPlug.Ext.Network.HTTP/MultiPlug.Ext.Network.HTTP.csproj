@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Components\HttpClient\HttpClientComponent.cs" />
+    <Compile Include="Components\HttpClient\HttpClientEventHandler.cs" />
     <Compile Include="Components\HttpEndpoint\HttpEndpointComponent.cs" />
     <Compile Include="Controllers\Assets\AssetsEndpoint.cs" />
     <Compile Include="Controllers\Assets\ImageController.cs" />
@@ -60,24 +61,35 @@
     <Compile Include="Controllers\Settings\Home\HomeController.cs" />
     <Compile Include="Controllers\Settings\HttpClient\Authorisation\HttpClientAuthorisationController.cs" />
     <Compile Include="Controllers\Settings\HttpClient\Body\HttpClientBodyController.cs" />
+    <Compile Include="Controllers\Settings\HttpClient\Body\HttpClientBodyDeleteController.cs" />
     <Compile Include="Controllers\Settings\HttpClient\Headers\HttpClientHeadersController.cs" />
     <Compile Include="Controllers\Settings\HttpClient\Headers\HttpClientHeadersDeleteController.cs" />
     <Compile Include="Controllers\Settings\HttpClient\HttpClientController.cs" />
     <Compile Include="Controllers\Settings\HttpClient\HttpClientDeleteController.cs" />
-    <Compile Include="Controllers\Settings\HttpClient\Params\HttpClientParamsController.cs" />
+    <Compile Include="Controllers\Settings\HttpClient\Query\HttpClientQueryController.cs" />
+    <Compile Include="Controllers\Settings\HttpClient\Query\HttpClientQueryDeleteController.cs" />
+    <Compile Include="Controllers\Settings\HttpClient\Response\HttpClientResponseController.cs" />
     <Compile Include="Controllers\Settings\HttpClient\Settings\HttpClientSettingsController.cs" />
+    <Compile Include="Controllers\Settings\HttpClient\Subscription\HttpClientSubscriptionController.cs" />
     <Compile Include="Controllers\Settings\SettingsApp.cs" />
     <Compile Include="Controllers\Templates.cs" />
     <Compile Include="Core.cs" />
     <Compile Include="Models\Components\HttpClient\Header.cs" />
     <Compile Include="Models\Components\HttpClient\HttpClientProperties.cs" />
+    <Compile Include="Models\Components\HttpClient\Param.cs" />
+    <Compile Include="Models\Components\HttpClient\SubjectValueRename.cs" />
     <Compile Include="Models\Components\HttpEndpoint\HttpEndpointProperties.cs" />
+    <Compile Include="Models\Exchange\SubjectRename.cs" />
+    <Compile Include="Models\Exchange\Subscription.cs" />
     <Compile Include="Models\Load\LoadRoot.cs" />
     <Compile Include="Models\Settings\About\AboutModel.cs" />
     <Compile Include="Models\Settings\Home\HomeModel.cs" />
     <Compile Include="Models\Settings\Home\NewHttpItem.cs" />
     <Compile Include="Models\Settings\HttpClient\Headers\HeadersModel.cs" />
     <Compile Include="Models\Settings\HttpClient\HttpClientModel.cs" />
+    <Compile Include="Models\Settings\HttpClient\Params\ParamsModel.cs" />
+    <Compile Include="Models\Settings\HttpClient\Response\ResponseModel.cs" />
+    <Compile Include="Models\Settings\HttpClient\Subscription\SubscriptionModel.cs" />
     <Compile Include="NetworkHttp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -93,8 +105,10 @@
     <None Include="Controllers\Settings\HttpClient\Body\HttpClientBody.cshtml" />
     <None Include="Controllers\Settings\HttpClient\Headers\HttpClientHeaders.cshtml" />
     <None Include="Controllers\Settings\HttpClient\HttpClient.cshtml" />
-    <None Include="Controllers\Settings\HttpClient\Params\HttpClientParams.cshtml" />
+    <None Include="Controllers\Settings\HttpClient\Query\HttpClientQuery.cshtml" />
+    <None Include="Controllers\Settings\HttpClient\Response\HttpClientResponse.cshtml" />
     <None Include="Controllers\Settings\HttpClient\Settings\HttpClientSettings.cshtml" />
+    <None Include="Controllers\Settings\HttpClient\Subscription\HttpClientSubscription.cshtml" />
     <None Include="Controllers\Settings\Shared\SettingsHttpClientNavigation.cshtml" />
     <None Include="packages.config" />
   </ItemGroup>

@@ -38,6 +38,7 @@
                         <select class="input-block-level" name="Verb">
                             <option @isCurrentVerb("Get")>Get</option>
                             <option @isCurrentVerb("Post")>Post</option>
+                            <option @isCurrentVerb("Put")>Put</option>
                         </select>
                     </div>
                     <div class="span10">
@@ -61,14 +62,51 @@
                             @foreach (var Subscription in @Model.Extension.Model.Subscriptions)
                             {
                                 <tr>
-                                    <td class="span10">@Subscription.Id</td>
-                                    <td class="span2"><a class="btn btn-red btn-deletesubscription" href="@Raw(Model.Context.Paths.Home)httpclient/delete/?id=@Model.Extension.Model.Guid&sub=@Subscription.Guid"><i class="icon-trash"></i></a></td>
+                                    <td class="span10"><a href="@Raw(Model.Context.Paths.Home)httpclient/subscription/?id=@Model.Extension.Model.Guid&sub=@Subscription.Guid">@Subscription.Id</a></td>
+                                    <td class="span2">
+                                        <div class="btn-group">
+                                            <a class="btn btn-blue" href="@Raw(Model.Context.Paths.Home)httpclient/subscription/?id=@Model.Extension.Model.Guid&sub=@Subscription.Guid"><i class="icon-edit"></i></a>
+                                            <a class="btn btn-red btn-deletesubscription" href="@Raw(Model.Context.Paths.Home)httpclient/delete/?id=@Model.Extension.Model.Guid&sub=@Subscription.Guid"><i class="icon-trash"></i></a>
+                                        </div>  
+                                    </td>
                                 </tr>
                             }
 
                             <tr>
                                 <td class="span10"></td>
                                 <td class="span2"><button type="button" class="btn btn-green" id="btn-subscription"><i class="icon-plus"></i></button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <h4>Subscription Value Renames</h4>
+            <div class="row-fluid">
+                <div class="well">
+
+                    <table id="RenamesTable" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th class="span5">Original Value</th>
+                                <th class="span5">Renamed Value</th>
+                                <th class="span2"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var Rename in @Model.Extension.Model.SubjectValueRenames)
+                            {
+                                <tr>
+                                    <td class="span5"><input type="hidden" name="SubjectValue" class="input-block-level" value="@Rename.Value">@Rename.Value</td>
+                                    <td class="span5"><input type="text" name="SubjectRename" class="input-block-level" value="@Rename.Rename" autocomplete="off"></td>
+                                    <td class="span2"><a class="btn btn-red btn-deleterename" href="@Raw(Model.Context.Paths.Home)httpclient/delete/?id=@Model.Extension.Model.Guid&renamevalue=@Rename.Value"><i class="icon-trash"></i></a></td>
+                                </tr>
+                            }
+
+                            <tr>
+                                <td class="span5"></td>
+                                <td class="span5"></td>
+                                <td class="span2"><button type="button" class="btn btn-green" id="btn-rename"><i class="icon-plus"></i></button></td>
                             </tr>
                         </tbody>
                     </table>
@@ -105,7 +143,7 @@
 
 <script>
     $("#btn-subscription").click(function () {
-        $('#SubscriptionsTable tr:last').before(NewHttpClient());
+        $('#SubscriptionsTable tr:last').before(NewSubscription());
 
         $(".btn-deletesubscriptiontemp").click(function (event) {
             event.preventDefault();
@@ -129,11 +167,46 @@
         });
     });
 
-    function NewHttpClient() {
+    function NewSubscription() {
         return '<tr>\
                 <td class="span10"><input type="text" name="Subscriptions" class="input-block-level mp-event-picker" value="" autocomplete="off"></td>\
                 <td class="span2"><a class="btn btn-red btn-deletesubscriptiontemp" href="#"><i class="icon-trash"></i></a></td>\
             </tr>'
     }
+
+    //-----
+
+
+    $("#btn-rename").click(function () {
+        $('#RenamesTable tr:last').before(NewRename());
+
+        $(".btn-deleterenametemp").click(function (event) {
+            event.preventDefault();
+            $(this).closest("tr").remove();
+        });
+    });
+
+    $(".btn-deleterename").click(function (event) {
+        event.preventDefault();
+
+        var theRow = $(this).closest("tr");
+
+        $.post($(this).attr('href'), function (data) {
+
+        })
+        .done(function () {
+            theRow.remove();
+        });
+    });
+
+    function NewRename() {
+        return '<tr>\
+                <td class="span5"><input type="text" name="SubjectValue" class="input-block-level" value="" autocomplete="off"></td>\
+                <td class="span5"><input type="text" name="SubjectRename" class="input-block-level" value="" autocomplete="off"></td>\
+                <td class="span2"><a class="btn btn-red btn-deletesubscriptiontemp" href="#"><i class="icon-trash"></i></a></td>\
+            </tr>'
+    }
+
+
 </script>
 

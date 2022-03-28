@@ -2,13 +2,13 @@
 using MultiPlug.Base.Attribute;
 using MultiPlug.Base.Http;
 using MultiPlug.Ext.Network.HTTP.Models.Components.HttpClient;
-using MultiPlug.Ext.Network.HTTP.Models.Settings.HttpClient;
+using MultiPlug.Ext.Network.HTTP.Models.Settings.HttpClient.Params;
 using MultiPlug.Ext.Network.HTTP.Components.HttpClient;
 
 namespace MultiPlug.Ext.Network.HTTP.Controllers.Settings.HttpClient
 {
-    [Route("httpclient")]
-    public class HttpClientController : SettingsApp
+    [Route("httpclient/query")]
+    public class HttpClientQueryController : SettingsApp
     {
         public Response Get(string id)
         {
@@ -25,11 +25,11 @@ namespace MultiPlug.Ext.Network.HTTP.Controllers.Settings.HttpClient
             return new Response
             {
                 Model = HttpClientSearch,
-                Template = Templates.SettingsHttpClient
+                Template = Templates.SettingsHttpClientQuery
             };
         }
 
-        public Response Post(HttpClientModel theModel)
+        public Response Post(ParamsModel theModel)
         {
             HttpClientComponent HttpClientSearch = Core.Instance.HttpClients.FirstOrDefault(Lane => Lane.Guid == theModel.Guid);
 
@@ -41,40 +41,23 @@ namespace MultiPlug.Ext.Network.HTTP.Controllers.Settings.HttpClient
                 };
             }
 
-            Models.Exchange.Subscription[] Subscriptions = null;
-
-
-            if( theModel.Subscriptions != null)
+            if (theModel.Key != null && theModel.Value != null && theModel.Description != null &&
+                (theModel.Key.Length == theModel.Value.Length) && (theModel.Key.Length == theModel.Description.Length))
             {
-                Subscriptions = theModel.Subscriptions.Select(sub => new Models.Exchange.Subscription { Id = sub }).ToArray();
-            }
+                var NewParams = new Param[theModel.Key.Length];
 
-            SubjectValueRename[] SubjectValueRenames = null;
-
-            if (theModel.SubjectValue != null
-                && theModel.SubjectRename != null
-                && theModel.SubjectValue.Length == theModel.SubjectRename.Length)
-            {
-
-                SubjectValueRenames = new SubjectValueRename[theModel.SubjectValue.Length];
-
-                for ( int i = 0; i < theModel.SubjectValue.Length; i++)
+                for (int i = 0; i < theModel.Key.Length; i++)
                 {
-                    SubjectValueRenames[i] = new SubjectValueRename
+                    NewParams[i] = new Param
                     {
-                        Value = theModel.SubjectValue[i],
-                        Rename = theModel.SubjectRename[i]
+                        Key = theModel.Key[i],
+                        Value = theModel.Value[i],
+                        Description = theModel.Description[i]
                     };
                 }
-            }
 
-            HttpClientSearch.UpdateProperties(new HttpClientProperties
-            {
-                Url = theModel.Url,
-                Verb = theModel.Verb,
-                Subscriptions = Subscriptions,
-                SubjectValueRenames = SubjectValueRenames
-            });
+                HttpClientSearch.AddQueryParams(NewParams);
+            }
 
             return new Response
             {

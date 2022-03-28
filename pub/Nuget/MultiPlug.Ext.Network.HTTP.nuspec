@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>MultiPlug.Ext.Network.HTTP</id>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
     <title>HTTP Extension for the MultiPlug .Net Edge Computing Platform</title>
     <authors>MultiPlugHub</authors>
     <owners>MultiPlugHub</owners>
@@ -11,7 +11,16 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>HTTP Extension for the MultiPlug .Net Edge Computing Platform</description>
 	<license type="expression">MIT</license>
-    <releaseNotes>1.0.2 Added HTTP Headers
+    <releaseNotes>
+1.0.3 https://github.com/multiplug-hub/MultiPlug.Ext.Network.HTTP/issues/8
+https://github.com/multiplug-hub/MultiPlug.Ext.Network.HTTP/issues/7
+https://github.com/multiplug-hub/MultiPlug.Ext.Network.HTTP/issues/6
+https://github.com/multiplug-hub/MultiPlug.Ext.Network.HTTP/issues/5
+https://github.com/multiplug-hub/MultiPlug.Ext.Network.HTTP/issues/4
+https://github.com/multiplug-hub/MultiPlug.Ext.Network.HTTP/issues/3
+https://github.com/multiplug-hub/MultiPlug.Ext.Network.HTTP/issues/2
+https://github.com/multiplug-hub/MultiPlug.Ext.Network.HTTP/issues/1
+1.0.2 Added HTTP Headers
 1.0.1 Basic Get/Post Http Requests
 1.0.0 Reserve name and create project scaffolding.</releaseNotes>
     <copyright>MultiPlug Community</copyright>
