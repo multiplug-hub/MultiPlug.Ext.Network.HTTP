@@ -15,6 +15,8 @@ namespace MultiPlug.Ext.Network.HTTP.Components.HttpClient
 
         private string[] c_Subjects = new string[] { "Response", "StatusCode", "Headers" };
 
+        private const string c_Group = "HttpClient";
+
         public HttpClientComponent(string theGuid)
         {
             this.Guid = theGuid;
@@ -24,7 +26,8 @@ namespace MultiPlug.Ext.Network.HTTP.Components.HttpClient
                 Guid = System.Guid.NewGuid().ToString(),
                 Id = System.Guid.NewGuid().ToString(),
                 Description = "HTTP Response",
-                Subjects = c_Subjects
+                Subjects = c_Subjects,
+                Group = c_Group
             };
             Subscriptions = new Models.Exchange.Subscription[0];
             Headers = new Header[0];

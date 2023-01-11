@@ -275,6 +275,58 @@ namespace MultiPlug.Ext.Network.HTTP.Properties {
         /// <summary>
         ///   Looks up a localized string similar to @model MultiPlug.Base.Http.EdgeApp
         ///
+        ///@functions
+        ///{
+        ///    string isConnected(bool theValue)
+        ///    {
+        ///        return (theValue) ? &quot;&lt;i class=\&quot;icon-ok icon-large\&quot;&gt;&lt;/i&gt;&quot; : &quot;&lt;i class=\&quot;icon-remove icon-large\&quot;&gt;&lt;/i&gt;&quot;;
+        ///    }
+        ///
+        ///    string isChecked(bool theValue)
+        ///    {
+        ///        return (theValue) ? &quot;checked&quot; : string.Empty;
+        ///    }
+        ///}
+        ///
+        ///&lt;form action=&quot;&quot; method=&quot;post&quot; accept-charset=&quot;utf-8&quot; enctype=&quot;application/x-www-form-urlencoded&quot;&gt;
+        ///    &lt;input type=&quot;hidden&quot; name=&quot;Guid&quot; value=&quot;@Model.Extension.Model.Guid&quot;&gt;
+        ///    &lt; [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string SettingsHttpClientSubscription {
+            get {
+                return ResourceManager.GetString("SettingsHttpClientSubscription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @model MultiPlug.Base.Http.EdgeApp
+        ///
+        ///@functions
+        ///{
+        ///    string isCurrentVerb(string theVerb)
+        ///    {
+        ///        return (@Model.Extension.Model.Verb == theVerb) ? &quot;selected&quot; : &quot;&quot;;
+        ///    }
+        ///}
+        ///
+        ///&lt;form action=&quot;&quot; method=&quot;post&quot; accept-charset=&quot;utf-8&quot; enctype=&quot;application/x-www-form-urlencoded&quot;&gt;
+        ///    &lt;input type=&quot;hidden&quot; name=&quot;Guid&quot; value=&quot;@Model.Extension.Model.Guid&quot;&gt;
+        ///    &lt;section class=&quot;row-fluid&quot;&gt;
+        ///
+        ///        &lt;div class=&quot;row-fluid&quot;&gt;
+        ///            &lt;div class=&quot;box&quot;&gt;
+        ///                &lt;div class=&quot;span2&quot;&gt;
+        ///             [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string SettingsHttpEndpoint {
+            get {
+                return ResourceManager.GetString("SettingsHttpEndpoint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @model MultiPlug.Base.Http.EdgeApp
+        ///
         ///&lt;form action=&quot;&quot; method=&quot;post&quot; accept-charset=&quot;utf-8&quot; enctype=&quot;application/x-www-form-urlencoded&quot;&gt;
         ///    &lt;input type=&quot;hidden&quot; name=&quot;Guid&quot; value=&quot;@Model.Extension.Model.Guid&quot;&gt;
         ///    &lt;section class=&quot;row-fluid&quot;&gt;
@@ -285,9 +337,32 @@ namespace MultiPlug.Ext.Network.HTTP.Properties {
         ///                    &lt;a href=&quot;@Raw(Model.Context.Paths.Home)&quot;&gt;&lt;img alt=&quot;Network Icon&quot; src=&quot;@Raw(Model.Context.Paths.Assets)images/networks.png&quot;&gt;&lt;/a&gt;
         ///                [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string SettingsHttpClientSubscription {
+        internal static string SettingsHttpEndpointAuthorisation {
             get {
-                return ResourceManager.GetString("SettingsHttpClientSubscription", resourceCulture);
+                return ResourceManager.GetString("SettingsHttpEndpointAuthorisation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @model MultiPlug.Base.Http.EdgeApp
+        ///@functions {
+        ///    public string NavLocationIsHome()
+        ///    {
+        ///        return Model.Context.Paths.Current == Model.Context.Paths.Home ? &quot;active&quot; : string.Empty;
+        ///    }
+        ///
+        ///    public string NavLocationIsHttpEndpoint()
+        ///    {
+        ///        return Model.Context.Paths.Current == Model.Context.Paths.Home + &quot;httpendpoint/&quot; ? &quot;active&quot; : string.Empty;
+        ///    }
+        ///
+        ///    public string NavLocationIsAuthorisation()
+        ///    {
+        ///        return Model.Context.Paths.Current == Model.Context.Paths.Home +  [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string SettingsHttpEndpointNavigation {
+            get {
+                return ResourceManager.GetString("SettingsHttpEndpointNavigation", resourceCulture);
             }
         }
     }

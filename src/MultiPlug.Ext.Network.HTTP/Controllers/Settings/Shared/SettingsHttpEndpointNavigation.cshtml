@@ -1,0 +1,44 @@
+﻿@model MultiPlug.Base.Http.EdgeApp
+@functions {
+    public string NavLocationIsHome()
+    {
+        return Model.Context.Paths.Current == Model.Context.Paths.Home ? "active" : string.Empty;
+    }
+
+    public string NavLocationIsHttpEndpoint()
+    {
+        return Model.Context.Paths.Current == Model.Context.Paths.Home + "httpendpoint/" ? "active" : string.Empty;
+    }
+
+    public string NavLocationIsAuthorisation()
+    {
+        return Model.Context.Paths.Current == Model.Context.Paths.Home + "httpendpoint/authorisation/" ? "active" : string.Empty;
+    }
+
+    public string NavLocationIsAbout()
+    {
+        return Model.Context.Paths.Current == Model.Context.Paths.Home + "about/" ? "active" : string.Empty;
+    }
+
+    public string NavLocationIsResponse()
+    {
+        return Model.Context.Paths.Current == Model.Context.Paths.Home + "httpclient/response/" ? "active" : string.Empty;
+    }
+}
+
+<div class="row-fluid">
+    <ul class="nav nav-tabs">
+        <li class="@NavLocationIsHome()"><a href="@Raw(Model.Context.Paths.Home)">Home</a></li>
+
+        @if (!string.IsNullOrEmpty(Model.Extension.Model.Guid))
+        {
+            <li class="@NavLocationIsHttpEndpoint()"><a href="@Raw(Model.Context.Paths.Home)httpendpoint/?id=@Model.Extension.Model.Guid">Request</a></li>
+            <li class="@NavLocationIsAuthorisation()"><a href="@Raw(Model.Context.Paths.Home)httpendpoint/authorisation/?id=@Model.Extension.Model.Guid">Authorisation</a></li>
+            <li class="@NavLocationIsAbout()"><a href="@Raw(Model.Context.Paths.Home)about/">About</a></li>
+        }
+        else
+        {
+            <li class="@NavLocationIsAbout()"><a href="@Raw(Model.Context.Paths.Home)about/">About</a></li>
+        }
+    </ul>
+</div>

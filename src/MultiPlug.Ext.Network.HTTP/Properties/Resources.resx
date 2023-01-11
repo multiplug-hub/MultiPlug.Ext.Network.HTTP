@@ -154,4 +154,13 @@
   <data name="SettingsHttpClientSubscription" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Controllers\Settings\HttpClient\Subscription\HttpClientSubscription.cshtml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
+  <data name="SettingsHttpEndpoint" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Controllers\Settings\HttpEndpoint\HttpEndpoint.cshtml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="SettingsHttpEndpointAuthorisation" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Controllers\Settings\HttpEndpoint\Authorisation\HttpEndpointAuthorisation.cshtml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="SettingsHttpEndpointNavigation" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Controllers\Settings\Shared\SettingsHttpEndpointNavigation.cshtml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
 </root>

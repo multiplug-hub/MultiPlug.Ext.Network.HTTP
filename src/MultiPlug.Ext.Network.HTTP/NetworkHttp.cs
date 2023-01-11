@@ -38,7 +38,11 @@ namespace MultiPlug.Ext.Network.HTTP
                     new RazorTemplate( Templates.SettingsHttpClientBody, Resources.SettingsHttpClientBody ),
                     new RazorTemplate( Templates.SettingsHttpClientQuery, Resources.SettingsHttpClientQuery ),
                     new RazorTemplate( Templates.SettingsHttpClientResponse, Resources.SettingsHttpClientResponse ),
-                    new RazorTemplate( Templates.SettingsHttpClientSettings, Resources.SettingsHttpClientSettings )
+                    new RazorTemplate( Templates.SettingsHttpClientSettings, Resources.SettingsHttpClientSettings ),
+
+                    new RazorTemplate( Templates.SettingsHttpEndpointNavigation, Resources.SettingsHttpEndpointNavigation ),
+                    new RazorTemplate( Templates.SettingsHttpEndpoint, Resources.SettingsHttpEndpoint ),
+                    new RazorTemplate( Templates.SettingsHttpEndpointAuthorisation, Resources.SettingsHttpEndpointAuthorisation )
                 };
             }
         }

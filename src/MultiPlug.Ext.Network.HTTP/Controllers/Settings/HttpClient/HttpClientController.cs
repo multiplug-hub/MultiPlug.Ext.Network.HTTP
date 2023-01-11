@@ -12,7 +12,7 @@ namespace MultiPlug.Ext.Network.HTTP.Controllers.Settings.HttpClient
     {
         public Response Get(string id)
         {
-            HttpClientProperties HttpClientSearch = Core.Instance.HttpClients.FirstOrDefault(Lane => Lane.Guid == id);
+            HttpClientProperties HttpClientSearch = Core.Instance.HttpClients.FirstOrDefault(HttpClient => HttpClient.Guid == id);
 
             if (HttpClientSearch == null)
             {
@@ -31,7 +31,7 @@ namespace MultiPlug.Ext.Network.HTTP.Controllers.Settings.HttpClient
 
         public Response Post(HttpClientModel theModel)
         {
-            HttpClientComponent HttpClientSearch = Core.Instance.HttpClients.FirstOrDefault(Lane => Lane.Guid == theModel.Guid);
+            HttpClientComponent HttpClientSearch = Core.Instance.HttpClients.FirstOrDefault(HttpClient => HttpClient.Guid == theModel.Guid);
 
             if (HttpClientSearch == null)
             {

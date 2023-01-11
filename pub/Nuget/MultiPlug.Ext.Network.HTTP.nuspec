@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>MultiPlug.Ext.Network.HTTP</id>
-    <version>1.0.3</version>
+    <version>1.0.4</version>
     <title>HTTP Extension for the MultiPlug .Net Edge Computing Platform</title>
     <authors>MultiPlugHub</authors>
     <owners>MultiPlugHub</owners>
@@ -11,7 +11,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>HTTP Extension for the MultiPlug .Net Edge Computing Platform</description>
 	<license type="expression">MIT</license>
-    <releaseNotes>
+    <releaseNotes>1.0.4 https://github.com/multiplug-hub/MultiPlug.Ext.Network.HTTP/issues/11
 1.0.3 https://github.com/multiplug-hub/MultiPlug.Ext.Network.HTTP/issues/8
 https://github.com/multiplug-hub/MultiPlug.Ext.Network.HTTP/issues/7
 https://github.com/multiplug-hub/MultiPlug.Ext.Network.HTTP/issues/6
@@ -27,9 +27,9 @@ https://github.com/multiplug-hub/MultiPlug.Ext.Network.HTTP/issues/1
     <tags>MultiPlug Edge_Computing Edge IoT HTTP No-Code Low-Code Low-Code/No-Code</tags>
     <dependencies>
       <group targetFramework=".NETFramework4.7.2">
-        <dependency id="MultiPlug.Base" version="1.0.69" />
-        <dependency id="MultiPlug.Extension.Core" version="1.0.63" />
-        <dependency id="MultiPlug.Core" version="2.2.79" />
+        <dependency id="MultiPlug.Base" version="1.0.71" />
+        <dependency id="MultiPlug.Extension.Core" version="1.0.64" />
+        <dependency id="MultiPlug.Core" version="2.2.80" />
       </group>
     </dependencies>
   </metadata>

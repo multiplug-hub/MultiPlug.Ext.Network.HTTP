@@ -1,5 +1,5 @@
 ﻿@model MultiPlug.Base.Http.EdgeApp
-<form action="" method="post" accept-charset="utf-8" enctype="application/x-www-form-urlencoded">
+<form action="" method="post" accept-charset="utf-8" enctype="application/x-www-form-urlencoded" autocomplete="off">
     <section class="row-fluid">
         <div class="row-fluid">
             <div class="box">
@@ -15,6 +15,8 @@
             </div>
         </div>
 
+        @Include("MultiPlug.Ext.Network.HTTP.Network_HTTP_Settings_HttpClient_Navigation")
+
         <div class="row-fluid">
             <div class="span6">
                 <h3 class="box-header"><i class="icon-signout"></i>Clients [ @Model.Extension.Model.HttpClients.Length ]</h3>
@@ -22,8 +24,8 @@
                     <table id="httpClientsTable" class="table table-striped">
                         <thead>
                             <tr>
-                                <th class="span2">Verb</th>
-                                <th class="span8">URL</th>
+                                <th class="span3">Verb</th>
+                                <th class="span7">URL</th>
                                 <th class="span2"></th>
                             </tr>
                         </thead>
@@ -31,20 +33,20 @@
                             @foreach (var HttpClient in @Model.Extension.Model.HttpClients)
                             {
                                 <tr>
-                                    <td class="span2"><a href="@Raw(Model.Context.Paths.Home)httpclient/?id=@HttpClient.Guid">@HttpClient.Verb</a></td>
-                                    <td class="span8"><a href="@Raw(Model.Context.Paths.Home)httpclient/?id=@HttpClient.Guid">@HttpClient.Url</a></td>
+                                    <td class="span3"><a href="@Raw(Model.Context.Paths.Home)httpclient/?id=@HttpClient.Guid">@HttpClient.Verb</a></td>
+                                    <td class="span7"><a href="@Raw(Model.Context.Paths.Home)httpclient/?id=@HttpClient.Guid">@HttpClient.Url</a></td>
                                     <td class="span2">
                                         <div class="btn-group">
                                             <a class="btn btn-blue" href="@Raw(Model.Context.Paths.Home)httpclient/?id=@HttpClient.Guid"><i class="icon-edit"></i></a>
                                             <a class="btn btn-red btn-deletehttpclient" href="@Raw(Model.Context.Paths.Home)httpclient/delete/?id=@HttpClient.Guid"><i class="icon-trash"></i></a>
-                                        </div>         
+                                        </div>
                                     </td>
                                 </tr>
                             }
 
                             <tr>
-                                <td class="span2"></td>
-                                <td class="span8"></td>
+                                <td class="span3"></td>
+                                <td class="span7"></td>
                                 <td class="span2"><button type="button" class="btn btn-green" id="btn-httpclient"><i class="icon-plus"></i></button></td>
                             </tr>
                         </tbody>
@@ -52,8 +54,45 @@
                 </div>
             </div>
             <div class="span6">
-                <h3 class="box-header"><i class="icon-signin"></i>Endpoints [ 0 ]</h3>
+                <h3 class="box-header"><i class="icon-signin"></i>Endpoints [ @Model.Extension.Model.HttpEndpoints.Length ]</h3>
                 <div class="box non-collapsible">
+                    <table id="httpEndpointsTable" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th class="span3">Verb</th>
+                                <th class="span7">URL</th>
+                                <th class="span2"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var HttpEndpoint in @Model.Extension.Model.HttpEndpoints)
+                            {
+                                <tr>
+                                    <td class="span3"><a href="@Raw(Model.Context.Paths.Home)httpendpoint/?id=@HttpEndpoint.Guid">@HttpEndpoint.Verb</a></td>
+                                    <td class="span7"><a href="@Raw(Model.Context.Paths.Home)httpendpoint/?id=@HttpEndpoint.Guid">@HttpEndpoint.Url</a></td>
+                                    <td class="span2">
+                                        <div class="btn-group">
+                                            <a class="btn btn-blue" href="@Raw(Model.Context.Paths.Home)httpendpoint/?id=@HttpEndpoint.Guid"><i class="icon-edit"></i></a>
+                                            <a class="btn btn-red btn-deletehttpendpoint" href="@Raw(Model.Context.Paths.Home)httpendpoint/delete/?id=@HttpEndpoint.Guid"><i class="icon-trash"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+
+                            <tr>
+                                <td class="span3"></td>
+                                <td class="span7"></td>
+                                <td class="span2"><button type="button" class="btn btn-green" id="btn-httpendpoint"><i class="icon-plus"></i></button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+
+                    <div class="span12">
+                        <div class="alert alert-info">
+                            <a href="#" class="close" data-dismiss="alert">×</a> Endpoint URL /api/multiplug.ext.network.http/{URL}/
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -86,15 +125,51 @@
 
     function NewHttpClient() {
         return '<tr>\
-                <td class="span4">\
-                    <select name="Verb">\
+                <td class="span3">\
+                    <select name="ClientVerb" class="input-block-level">\
                         <option value="Get">Get</option>\
                         <option value="Post">Post</option>\
                     </select>\
                 </td>\
-                <td class="span4"><input type="text" name="Url" value="" autocomplete="off"></td>\
-                <td class="span2"></td>\
+                <td class="span7"><input type="text" class="input-block-level" name="ClientUrl" value="" autocomplete="off"></td>\
                 <td class="span2"><a class="btn btn-red btn-deletehttpclienttemp" href="#"><i class="icon-trash"></i></a></td>\
+            </tr>'
+    }
+
+    $("#btn-httpendpoint").click(function () {
+        $('#httpEndpointsTable tr:last').before(NewHttpEndpoint());
+
+        $(".btn-deletehttpendpointtemp").click(function (event) {
+            event.preventDefault();
+            $(this).closest("tr").remove();
+        });
+
+    });
+
+    $(".btn-deletehttpendpoint").click(function (event) {
+        event.preventDefault();
+
+        var theRow = $(this).closest("tr");
+
+        $.post($(this).attr('href'), function (data) {
+
+        })
+        .done(function () {
+            theRow.remove();
+        });
+    });
+
+
+    function NewHttpEndpoint() {
+        return '<tr>\
+                <td class="span3">\
+                    <select name="EndpointVerb" class="input-block-level">\
+                        <option value="Post">Post</option>\
+                        <option value="Get">Get</option>\
+                    </select>\
+                </td>\
+                <td class="span7"><input type="text" class="input-block-level" name="EndpointUrl" value="" autocomplete="off"></td>\
+                <td class="span2"><a class="btn btn-red btn-deletehttpendpointtemp" href="#"><i class="icon-trash"></i></a></td>\
             </tr>'
     }
 </script>

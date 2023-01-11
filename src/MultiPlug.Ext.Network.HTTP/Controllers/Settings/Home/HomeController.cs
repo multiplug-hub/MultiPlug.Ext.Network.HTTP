@@ -13,7 +13,8 @@ namespace MultiPlug.Ext.Network.HTTP.Controllers.Settings.Home
             {
                 Model = new HomeModel
                 {
-                    HttpClients = Core.Instance.HttpClients
+                    HttpClients = Core.Instance.HttpClients,
+                    HttpEndpoints = Core.Instance.HttpEndpoints
                 },
                 Template = Templates.SettingsHome
             };
@@ -21,14 +22,24 @@ namespace MultiPlug.Ext.Network.HTTP.Controllers.Settings.Home
         public Response Post(NewHttpItem theModel)
         {
             if (theModel != null
-                && theModel.Url != null
-                && theModel.Verb != null
-                && theModel.Url.Length == theModel.Verb.Length)
+                && theModel.ClientUrl != null
+                && theModel.ClientVerb != null
+                && theModel.ClientUrl.Length == theModel.ClientVerb.Length)
             {
 
-                for (int Index = 0; Index < theModel.Url.Length; Index++)
+                for (int Index = 0; Index < theModel.ClientUrl.Length; Index++)
                 {
-                    Core.Instance.HttpClientAdd(theModel.Verb[Index], theModel.Url[Index]);
+                    Core.Instance.HttpClientAdd(theModel.ClientVerb[Index], theModel.ClientUrl[Index]);
+                }
+            }
+
+            if (theModel != null
+                && theModel.EndpointUrl != null
+                && theModel.EndpointVerb != null)
+            {
+                for (int Index = 0; Index < theModel.EndpointUrl.Length; Index++)
+                {
+                    Core.Instance.HttpEndpointAdd(theModel.EndpointUrl[Index], theModel.EndpointVerb[Index]);
                 }
             }
 
