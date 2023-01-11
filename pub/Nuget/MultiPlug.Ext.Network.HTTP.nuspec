@@ -11,6 +11,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>HTTP Extension for the MultiPlug .Net Edge Computing Platform</description>
 	<license type="expression">MIT</license>
+	<repository type="git" url="https://github.com/multiplug-hub/MultiPlug.Ext.Network.HTTP" />
     <releaseNotes>1.0.4 https://github.com/multiplug-hub/MultiPlug.Ext.Network.HTTP/issues/11
 1.0.3 https://github.com/multiplug-hub/MultiPlug.Ext.Network.HTTP/issues/8
 https://github.com/multiplug-hub/MultiPlug.Ext.Network.HTTP/issues/7
